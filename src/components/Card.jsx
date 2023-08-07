@@ -3,8 +3,8 @@ import ViewsIcon from "../assets/icons/views.svg";
 
 const Card = ({ title, body, views, createdAt, user }) => {
   return (
-    <div className="w-full border rounded-xl p-[20px] mb-[20px]">
-      <h1 className="text-[28px] font-semibold bg-gradient-to-r from-[#FF8A00] to-[#BD00FF] bg-clip-text text-transparent mb-[9px]">
+    <div className="w-full border rounded-xl p-[20px] mb-[20px] hover:border-gray-500">
+      <h1 className="cursor-pointer hover:border-b-1 hover:border-black text-[28px] font-semibold bg-gradient-to-r from-[#FF8A00] to-[#BD00FF] bg-clip-text text-transparent mb-[9px]">
         {title}
       </h1>
       <p className="text-[17px] text-[#1A1919] mb-[25px]">{body}</p>
