@@ -45,7 +45,9 @@ const Home = () => {
       </div>
 
       <main>
-        {posts.length ? posts?.map((post) => <Card {...post} />) : "Loading..."}
+        {posts.length
+          ? posts?.map((post, index) => <Card key={index} {...post} />)
+          : "Loading..."}
       </main>
     </div>
   );
