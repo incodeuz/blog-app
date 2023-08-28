@@ -47,7 +47,7 @@ const Home = () => {
 
       <main>
         {posts.length ? (
-          posts?.map((post, index) => <Card key={index} {...post} />)
+          posts?.map((post, index) => <Card key={index} {...post} x/>)
         ) : (
           <img src={LoaderGif} alt="" className="w-[40px] mx-auto" />
         )}

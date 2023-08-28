@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LoaderGif from "../assets/icons/loader.gif";
 import ViewsIcon from "../assets/icons/eye.svg";
 
 const Details = () => {
   const { id } = useParams();
   const [post, setPost] = useState({});
-
+  const navigate = useNavigate();
   useEffect(() => {
     async function fetcher() {
       const res = await fetch(
@@ -32,10 +32,18 @@ const Details = () => {
                   {post?.user?.username}
                 </h2>
               </div>
-
-              <button className="border-2 bg-blue-500 text-white py-2 px-4 rounded-lg hover:border-blue-400">
-                Follow
-              </button>
+              {post?.user?.id === localStorage.getItem("my_id") ? (
+                <button
+                  onClick={() => navigate("/edit-post/" + post?.id)}
+                  className="bg-blue-500 py-2 px-4 rounded-md flex items-center gap-1 text-white font-medium"
+                >
+                  <i class="bx bx-edit-alt"></i> <span>Edit Post</span>
+                </button>
+              ) : (
+                <button className="border-2 bg-blue-500 text-white py-2 px-4 rounded-lg hover:border-blue-400">
+                  Follow
+                </button>
+              )}
             </div>
             <div className="flex items-center gap-5 mt-3">
               <p className="text-gray-500">

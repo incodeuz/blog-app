@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import { Outlet } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const MainLayout = () => {
           <Navbar />
         </nav>
       </header>
-      <main className="w-[100%] max-w-[800px] mx-auto">
+      <main className="w-[100%] max-w-[800px] mx-auto mt-[50px]">
         <Outlet />
       </main>
     </>

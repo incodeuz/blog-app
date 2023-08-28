@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import ViewsIcon from "../assets/icons/views.svg";
 import { Link } from "react-router-dom";
+import { ModalContext } from "../context/modalContext";
 
 const Card = ({ title, body, views, createdAt, user, id }) => {
+  const { isModalOpen, setIsModalOpen, modalUser, setModalUser } =
+    useContext(ModalContext);
+  const openModal = (id) => {
+    setModalUser(id);
+    setIsModalOpen(true);
+  };
   return (
     <div className="w-full border rounded-xl p-[20px] mb-[20px] hover:border-gray-500">
       <Link className="w-fit" to={`/details/${id}`}>
@@ -16,8 +23,11 @@ const Card = ({ title, body, views, createdAt, user, id }) => {
       <p className="text-[17px] text-[#1A1919] mb-[25px]">
         {body.length > 250 ? body.slice(0, 250) + "..." : body}
       </p>
-      <p className="w-fit text-[17px] text-[#1A1919] mb-[10px] font-bold hover:underline cursor-pointer">
-        ● {user.username}
+      <p
+        onClick={() => openModal(user.id)}
+        className="w-fit text-[17px] text-[#1A1919] mb-[10px] font-bold hover:underline cursor-pointer"
+      >
+        ● {user.id === localStorage.getItem("my_id") ? "You" : user.username}
       </p>
       <div className="flex items-center gap-3">
         <p className="text-[14px] text-[#949494]">
