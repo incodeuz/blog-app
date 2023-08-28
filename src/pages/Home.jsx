@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SearchIcon from "../assets/icons/search.svg";
 import Card from "../components/Card";
+import LoaderGif from "../assets/icons/loader.gif";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -26,7 +27,7 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full mt-[50px]">
       <div className="flex items-center gap-3 w-full mb-10">
         <div className="relative w-full">
           <img className="absolute top-[5px] left-1" src={SearchIcon} alt="" />
@@ -45,9 +46,11 @@ const Home = () => {
       </div>
 
       <main>
-        {posts.length
-          ? posts?.map((post, index) => <Card key={index} {...post} />)
-          : "Loading..."}
+        {posts.length ? (
+          posts?.map((post, index) => <Card key={index} {...post} />)
+        ) : (
+          <img src={LoaderGif} alt="" className="w-[40px] mx-auto" />
+        )}
       </main>
     </div>
   );

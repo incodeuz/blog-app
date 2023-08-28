@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../assets/icons/logo.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Modal, Popconfirm, Tabs, message } from "antd";
 
 const Navbar = () => {
@@ -32,8 +32,12 @@ const Navbar = () => {
     handleCancel();
     localStorage.clear();
   };
-  const cancel = (e) => {};
-  console.log(me);
+  const onCloseModal = () => {
+    handleCancel();
+    setTimeout(() => {
+      window.location.reload();
+    }, 300);
+  };
   return (
     <>
       <Modal
@@ -74,12 +78,17 @@ const Navbar = () => {
                   ),
                   key: 1,
                   children: me?.blog.map((post, index) => (
-                    <div className="flex items-center gap-2">
-                      <p>{index + 1}.</p>
-                      <p className="font-semibold my-1 hover:underline cursor-pointer">
-                        {post.title}
-                      </p>
-                    </div>
+                    <Link
+                      to={`/details/${post?.id}`}
+                      onClick={() => onCloseModal()}
+                    >
+                      <div className="flex items-center gap-2">
+                        <p>{index + 1}.</p>
+                        <p className="font-semibold my-1 hover:underline cursor-pointer">
+                          {post?.title}
+                        </p>
+                      </div>
+                    </Link>
                   )),
                 },
                 {
@@ -121,7 +130,6 @@ const Navbar = () => {
               title="Warning !!!"
               description="Are you sure to log out?"
               onConfirm={confirm}
-              onCancel={cancel}
               okText="Yes"
               cancelText="No"
             >
@@ -133,7 +141,9 @@ const Navbar = () => {
         )}
       </Modal>
       <div className="py-[10px] px-[30px] flex items-center justify-between">
-        <img src={Logo} alt="" />
+        <Link to="/">
+          <img src={Logo} alt="" />
+        </Link>
         {localStorage.getItem("token") ? (
           <button
             onClick={showModal}

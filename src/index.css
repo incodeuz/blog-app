@@ -14,3 +14,13 @@
 .ant-btn-primary {
   background-color: rgb(75, 46, 220);
 }
+
+#text {
+  line-height: 28px;
+  width: fit-content;
+  border-bottom: 2px solid transparent;
+}
+
+#text:hover {
+  border-bottom: 2px solid black;
+}
